@@ -17,24 +17,32 @@ public class FSDatabaseProvider extends ContentProvider {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private static final String AUTHORITY = "uk.templedynamic.flyingsquirrel.DatabaseProvider";
+    private static final String AUTHORITY = "uk.templedynamic.fsskeleton.FSDatabaseProvider";
     private static final String BASE_PATH = "content://" + AUTHORITY + "/";
 
     // Arbitrary values used by the URI matcher below
     public static final int ATTACHMENTS = 190;
     public static final int MESSAGES = 200;
+    public static final int QUESTIONS = 300;
+    public static final int ANSWERS = 310;
 
-    private static final String MESSAGES_PATH = "properties";
+    private static final String MESSAGES_PATH = "messages";
     private static final String ATTACHMENTS_PATH = "attachments";
+    private static final String QUESTIONS_PATH = "questions";
+    private static final String ANSWERS_PATH = "answers";
 
     public static final Uri MESSAGES_URI = Uri.parse(BASE_PATH + MESSAGES_PATH);
     public static final Uri ATTACHMENTS_URI = Uri.parse(BASE_PATH + ATTACHMENTS_PATH);
+    public static final Uri QUESTIONS_URI = Uri.parse(BASE_PATH + QUESTIONS_PATH);
+    public static final Uri ANSWERS_URI = Uri.parse(BASE_PATH + ANSWERS_PATH);
 
     // Not using URI
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
         sURIMatcher.addURI(AUTHORITY, MESSAGES_PATH, MESSAGES);
         sURIMatcher.addURI(AUTHORITY, ATTACHMENTS_PATH, ATTACHMENTS);
+        sURIMatcher.addURI(AUTHORITY, QUESTIONS_PATH, QUESTIONS);
+        sURIMatcher.addURI(AUTHORITY, ANSWERS_PATH, ANSWERS);
      }
 
     private FSDatabaseManager dbm;
@@ -60,12 +68,20 @@ public class FSDatabaseProvider extends ContentProvider {
         int uriType = sURIMatcher.match(uri);
         switch (uriType) {
             case MESSAGES:
-                Log.i(TAG, "Navtables query " + uri.toString());
-                queryBuilder.setTables(FSDatabaseSchema.TABLE_MESSAGES);
+                Log.i(TAG, "Messages query " + uri.toString());
+                queryBuilder.setTables(FSDatabaseTableDefs.TABLE_MESSAGES);
                 break;
             case ATTACHMENTS:
-                Log.i(TAG, "Navlinks query " + uri.toString());
-                queryBuilder.setTables(FSDatabaseSchema.TABLE_ATTACHMENTS);
+                Log.i(TAG, "Attachments query " + uri.toString());
+                queryBuilder.setTables(FSDatabaseTableDefs.TABLE_ATTACHMENTS);
+                break;
+            case QUESTIONS:
+                Log.i(TAG, "Questions query " + uri.toString());
+                queryBuilder.setTables(FSDatabaseTableDefs.TABLE_QUESTIONS);
+                break;
+            case ANSWERS:
+                Log.i(TAG, "Answers query " + uri.toString());
+                queryBuilder.setTables(FSDatabaseTableDefs.TABLE_ANSWERS);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI");
@@ -91,7 +107,6 @@ public class FSDatabaseProvider extends ContentProvider {
         return cursor;
     }
 
-
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         // should uri for the newly created row
@@ -106,7 +121,7 @@ public class FSDatabaseProvider extends ContentProvider {
         int uriType = sURIMatcher.match(uri);
         switch (uriType) {
             case ATTACHMENTS:
-                long id = sqlDB.insert(FSDatabaseSchema.TABLE_ATTACHMENTS, null, values);
+                long id = sqlDB.insert(FSDatabaseTableDefs.TABLE_ATTACHMENTS, null, values);
                 getContext().getContentResolver().notifyChange(uri, null);
                 retUri = Uri.parse(ATTACHMENTS_PATH + "/" + id);
                 Log.i(TAG, "Inserted into attachments. Returning: " + retUri.toString() );

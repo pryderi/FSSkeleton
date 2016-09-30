@@ -1,21 +1,17 @@
 package uk.templedynamic.fsskeleton;
 
-
+import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.app.LoaderManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import java.lang.String;
 import java.util.ArrayList;
 
-import static android.R.attr.fragment;
 
-
-public class FSMessagesActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,  FSMessagesFragment.OnItemSelectedListener {
+public class FSQuestionsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,  FSQuestionsFragment.OnItemSelectedListener {
 
     private final String TAG = this.getClass().getSimpleName();
     private static final int LOADER_MESSAGES = 0x01;
@@ -33,9 +29,9 @@ public class FSMessagesActivity extends AppCompatActivity implements LoaderManag
         getLoaderManager().initLoader(LOADER_MESSAGES, null, this);
     }
 
-    public void onIndexItemSelected(FSMessage message) {
+    public void onIndexItemSelected(FSQuestion question) {
 
-        Log.i(TAG, "Message was selected with ID " + message.record_id);
+        Log.i(TAG, "Question was selected with ID " + question.record_id);
         switch (displayMode) {
             case TWO_PANELS:
                 // two panels, so need to load the selected content page locally

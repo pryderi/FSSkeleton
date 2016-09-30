@@ -1,5 +1,6 @@
 package uk.templedynamic.fsskeleton;
 
+import android.app.Activity;
 import android.app.ListFragment;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -8,8 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 /**
  * Created by pryderi on 28/09/2016.
@@ -24,14 +29,11 @@ public class FSMessagesFragment extends ListFragment {
     private final String TAG = this.getClass().getSimpleName();
     private OnItemSelectedListener listener;
     private FSMessagesCursorAdapter cursorAdapter;
-    private LinearLayout llayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.i(TAG, "on Create");
- //       ConfigurationManager configurationManager = ConfigurationManager.getTheConfigurationManager();
-        View view = inflater.inflate(R.layout.activity_messages, container, false);
-        llayout = (LinearLayout)view.findViewById(R.id.messages_table_fragment);
+        View view = inflater.inflate(R.layout.messages_table_frag, container, false);
         return view;
     }
 
@@ -49,29 +51,13 @@ public class FSMessagesFragment extends ListFragment {
         listener = null;
     }
 
-    // May also be triggered from the Activity
-    public void updateDetail() {
-        // Create a string, just for testing
-        Log.i(TAG, "Updating detail text");
-        Cursor cursor = (Cursor) getListAdapter().getItem(0);
-        FSMessage message = FSMessage.recordFromCursor(cursor);
-        listener.onIndexItemSelected(message);
-    }
-
-//    public void applyTheme(FSTheme newTheme) {
-//        theme =  newTheme;
-//        if (llayout != null) {
-//            theme.configureBackgroundLayout(this.getActivity(), llayout);
-//        }
-//    }
-
     public void showPagesFromCursor(Cursor cursor) {
+        Log.i(TAG, "Mapping messages fragment - " + cursor.getCount() + " messages to display");
         String[] uiBindFrom = new String[]{ FSMessage.COL_TITLE, FSMessage.COL_CONTENT };
         int[] uiBindTo = new int[] {R.id.message_row_title, R.id.message_row_content};
-        Log.i(TAG, "Mapping page cursor from " + FSMessage.COL_TITLE + " to col " + android.R.id.text1);
-        cursorAdapter = new FSMessagesCursorAdapter( getActivity(), android.R.layout.simple_list_item_1,
-                cursor, uiBindFrom, uiBindTo, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER );
-//        cursorAdapter.setTheme(this.theme);
+        Log.i(TAG, "Mapping page cursor from " + FSMessage.COL_TITLE + " to col " + R.id.message_row_content);
+        cursorAdapter = new FSMessagesCursorAdapter( getActivity(), android.R.layout.simple_list_item_1, cursor, uiBindFrom, uiBindTo, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER );
         setListAdapter(cursorAdapter);
     }
+
 }

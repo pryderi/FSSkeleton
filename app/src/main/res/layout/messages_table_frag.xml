@@ -2,12 +2,13 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/messages_table_fragment"
+    android:id="@+id/messages_table_linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ListView android:id="@android:id/list"
+    <ListView
+        android:id="@android:id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawSelectorOnTop="false"/>
@@ -16,5 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#222222"
-        android:text="No data"/>
+        android:textColor="#ffaaaa"
+        android:text="No messages"/>
+
 </LinearLayout>

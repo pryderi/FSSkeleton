@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="uk.templedynamic.fsskeleton">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".FSMessagesActivity" />
+        <activity
+            android:name=".FSGalleryActivity"
+            android:label="@string/title_activity_gallery"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name=".FSDatabaseProvider"
+            android:authorities="uk.templedynamic.fsskeleton.FSDatabaseProvider"
+            android:multiprocess="true" />
+
+        <activity
+            android:name=".FSQuestionsActivity"
+            android:label="@string/title_activity_questions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FSQuizResultsActivity"
+            android:label="@string/title_activity_fsquiz_results"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

@@ -39,27 +39,23 @@ public class FSMessage extends FSDatabaseRecord {
     public Date created_at, updated_at;
 
 
-    public static Uri getTableURI() {
-        return FSDatabaseProvider.MESSAGES_URI;
-    }
-
-    private static String[] allcolumns = {COL_ID, COL_GLOBAL_ID, COL_SOURCE_ID, COL_DEST_ID, COL_TITLE, COL_CONTENT, COL_STATUS, COL_REF_TYPE, COL_REF_ID, COL_EXCHANGE_TYPE, COL_CREATED_AT, COL_UPDATED_AT};
-
     public static FSMessage recordFromCursor(Cursor cursor) {
         FSMessage newMsg = new FSMessage();
-        newMsg.record_id = cursor.getString(0);
-        newMsg.global_id = cursor.getString(1);
-        newMsg.source_id = cursor.getString(2);
-        newMsg.dest_id = cursor.getString(3);
-        newMsg.title = cursor.getString(4);
-        newMsg.content = cursor.getString(5);
-        newMsg.status = cursor.getString(6);
-        newMsg.ref_type = cursor.getString(7);
-        newMsg.ref_id = cursor.getString(8);
-        newMsg.exchange_type = cursor.getString(9);
-        newMsg.created_at = sqltimeFromString(cursor.getString(10));
-        newMsg.updated_at = sqltimeFromString(cursor.getString(11));
+        newMsg.record_id = cursor.getString(cursor.getColumnIndex(COL_ID));
+        newMsg.global_id = cursor.getString(cursor.getColumnIndex(COL_GLOBAL_ID));
+        newMsg.source_id = cursor.getString(cursor.getColumnIndex(COL_SOURCE_ID));
+        newMsg.dest_id = cursor.getString(cursor.getColumnIndex(COL_DEST_ID));
+        newMsg.title = cursor.getString(cursor.getColumnIndex(COL_TITLE));
+        newMsg.content = cursor.getString(cursor.getColumnIndex(COL_CONTENT));
+        newMsg.status = cursor.getString(cursor.getColumnIndex(COL_STATUS));
+        newMsg.ref_type = cursor.getString(cursor.getColumnIndex(COL_REF_TYPE));
+        newMsg.ref_id = cursor.getString(cursor.getColumnIndex(COL_REF_ID));
+        newMsg.exchange_type = cursor.getString(cursor.getColumnIndex(COL_EXCHANGE_TYPE));
+        newMsg.created_at = sqltimeFromString(cursor.getString(cursor.getColumnIndex(COL_CREATED_AT)));
+        newMsg.updated_at = sqltimeFromString(cursor.getString(cursor.getColumnIndex(COL_UPDATED_AT)));
         return newMsg;
     }
+
+    public static final String[] allcolumns = {COL_ID, COL_GLOBAL_ID, COL_SOURCE_ID, COL_DEST_ID, COL_TITLE, COL_CONTENT, COL_STATUS, COL_REF_TYPE, COL_REF_ID, COL_EXCHANGE_TYPE, COL_CREATED_AT, COL_UPDATED_AT};
 
 }
