@@ -1,18 +1,17 @@
 package uk.templedynamic.fsskeleton;
 
 
+import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
-import android.app.LoaderManager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import java.lang.String;
 import java.util.ArrayList;
-
-import static android.R.attr.fragment;
 
 
 public class FSMessagesActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,  FSMessagesFragment.OnItemSelectedListener {
@@ -32,6 +31,17 @@ public class FSMessagesActivity extends AppCompatActivity implements LoaderManag
         setContentView(R.layout.activity_messages);
         getLoaderManager().initLoader(LOADER_MESSAGES, null, this);
     }
+
+
+    public void addNewMessage(FSMessage newMessage) {
+
+        // adding a new message, called from onOptionsItemSelected below.
+        // Add the message to the array of messages and reload.
+
+        Log.i(TAG, "Adding a new message.");
+
+    }
+
 
     public void onIndexItemSelected(FSMessage message) {
 
@@ -54,6 +64,30 @@ public class FSMessagesActivity extends AppCompatActivity implements LoaderManag
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_new_message, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_new_message) {
+            FSMessage newMsg = new FSMessage();
+            newMsg.title = "New message";
+            newMsg.content = "This is a new message";
+            addNewMessage(newMsg);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
 //        CursorLoader cursorLoader = null;
@@ -67,6 +101,8 @@ public class FSMessagesActivity extends AppCompatActivity implements LoaderManag
         CursorLoader cursorLoader =  new CursorLoader(this, FSDatabaseProvider.MESSAGES_URI, FSMessage.allcolumns, null, null, null);
         return cursorLoader;
     }
+
+
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {

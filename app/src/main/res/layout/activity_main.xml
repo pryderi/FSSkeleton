@@ -43,19 +43,13 @@
             android:layout_gravity="center_vertical|center_horizontal" />
 
         <Button
-            android:text="Camera"
+            android:text="Photos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/camera_button"
             app:layout_anchorGravity="center_vertical"
             android:layout_gravity="center_vertical|left" />
 
-        <Button
-            android:text="Quiz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/quiz_button"
-            tools:text="Quiz" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

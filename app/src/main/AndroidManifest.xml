@@ -30,12 +30,12 @@
             android:multiprocess="true" />
 
         <activity
-            android:name=".FSQuestionsActivity"
-            android:label="@string/title_activity_questions"
+            android:name=".CameraActivity"
+            android:label="@string/title_activity_camera"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FSQuizResultsActivity"
-            android:label="@string/title_activity_fsquiz_results"
+            android:name=".PhotoImportActivity"
+            android:label="@string/title_activity_photo_import"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
