@@ -1,7 +1,7 @@
 package uk.templedynamic.fsskeleton;
 
-import android.app.Activity;
 import android.app.ListFragment;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,12 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
 /**
  * Created by pryderi on 28/09/2016.
@@ -43,6 +38,16 @@ public class FSMessagesFragment extends ListFragment {
         FSMessage message = FSMessage.recordFromCursor(cursor);
         Log.i(TAG, "Listview item click at position " + position + ". Message is " + message.record_id + ": " + message.title);
         listener.onIndexItemSelected(message);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnItemSelectedListener) {
+            listener = (OnItemSelectedListener) context;
+        } else {
+            throw new ClassCastException(context.toString() + " must implement MyListFragment.OnItemSelectedListener");
+        }
     }
 
     @Override
