@@ -19,10 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".FSMessagesActivity" />
-        <activity
-            android:name=".FSGalleryActivity"
-            android:label="@string/title_activity_gallery"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name=".FSDatabaseProvider"
@@ -36,6 +32,22 @@
         <activity
             android:name=".PhotoImportActivity"
             android:label="@string/title_activity_photo_import"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PhotoActivity"
+            android:label="@string/title_activity_photo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".FSGalleryActivity"
+            android:label="@string/title_activity_fsgallery"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

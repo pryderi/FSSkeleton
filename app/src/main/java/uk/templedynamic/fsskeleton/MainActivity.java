@@ -13,11 +13,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private final String TAG = this.getClass().getSimpleName();
 
-    public static final String ACTIVITY_MESSSAGES = "messages";
-    public static final String ACTIVITY_CAMERA = "camera";
-    public static final String ACTIVITY_QUIZ = "quiz";
-
-    public static final String ACTIVITY_NUTTY = "nuts";
+    private static final String ACTIVITY_MESSSAGES = "messages";
+    private static final String ACTIVITY_CAMERA = "camera";
 
     private FSDatabaseManager dbm;
 

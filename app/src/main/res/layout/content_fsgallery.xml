@@ -11,6 +11,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="uk.templedynamic.fsskeleton.FSGalleryActivity"
-    tools:showIn="@layout/activity_gallery">
+    tools:showIn="@layout/activity_fsgallery">
 
+    <ImageView
+        android:layout_width="100dp"
+        app:srcCompat="@drawable/lemur_leaf_frog"
+        android:id="@+id/frog_thumbnail"
+        android:layout_height="100dp" />
 </RelativeLayout>
