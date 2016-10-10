@@ -3,12 +3,9 @@ package uk.templedynamic.fsskeleton;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,41 +46,7 @@ public class FSGalleryActivity extends AppCompatActivity implements View.OnTouch
         // to add a new attachment just do
         FSAttachment attachment = new FSAttachment();
         attachment.save();
-
         // There is nothing else to do here!
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_gallery, menu);
-
-        //View frogpicture = (ImageView) this.findViewById(R.id.ImageView);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_show_camera) {
-            // If the phone has a camera, launch an activity that allows the user to take a photo
-            Intent i = new Intent(this, CameraActivity.class);
-            startActivity(i);
-            return true;
-        } else if (id == R.id.action_show_gallery) {
-            // If the phone has a camera, launch an activity that allows the user to take a photo
-            Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(i, RESULT_LOAD_IMAGE);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 
